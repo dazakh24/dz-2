@@ -66,17 +66,47 @@ https://confluence.mts.ru/pages/viewpage.action?pageId=375782119
 #### Диаграмма сценариев использования (Use Case Diagram) <!-- omit in toc -->
 
 ```plantuml
-@startuml
-left to right direction
-actor "Food Critic" as fc
-rectangle Restaurant {
-  usecase "Eat Food" as UC1
-  usecase "Pay for Food" as UC2
-  usecase "Drink" as UC3
+@startuml exzample
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+
+Person(customer0, "Партнер/Слушатель")
+Person(customer1, "Выступающий")
+Person(customer2, "Контент менеджер")
+Person(customer3, "Фасилитатор")
+Person(customer4, "Администратор")
+Person(customer5, "Руководитель проекта")
+
+System_Boundary(alias, "label"){
+    
+
+
+Container(webUI, "Web UI", "React", "Web приложение")
+Container(webOf, "BackOffice", "React", "Web приложение")
+Container(be, "BackEnd", "Java", "BE приложение")
+Container(email, "Email", "Mail server", "Почтовый ящик")
+Container(metr, "Metrics", "Grafana", "Сборщик метрик")
+ContainerDb(db, "DB", "PostgreSQL", "База данных")
+ContainerQueue(Queue, "Queue", "Kafka")
+
+Rel(customer0, webUI, "Вход, регистрация,трансляции", "HTTPS")
+Rel(customer1, webUI, "Загрузка докладов", "HTTPS")
+Rel(webUI, be, "Вход, регистрация, трансляция", "HTTPS")
+Rel(customer2, webOf, "Управление контентом", "HTTPS")
+Rel(customer3, webOf, "Управление расписанием, обратная связь", "HTTPS")
+Rel(customer4, webOf, "Управление трансляцией", "HTTPS")
+Rel(customer5, webOf, "Контроль мероприятия", "HTTPS")
+Rel(webOf, be, "Доклады, логи, трансляции, ретинги, расписание", "HTTPS")
+Rel(email, be, "Загрузка докладов", "HTTPS")
+Rel(webOf, Queue, "Работа с докладами", "HTTPS")
+Rel(Queue, be, "Работа с докладами", "HTTPS")
+Rel(be, db, "Загрузка докладов", "HTTPS")
+Rel(metr, db, "Сбор метрик на основе логов", "HTTPS")
+Rel(webOf, metr, "Сбор метрик на основе логов", "HTTPS")
+Rel(webUI, email, "Загрузка доклада", "HTTPS")
+
 }
-fc --> UC1
-fc --> UC2
-fc --> UC3
+
 @enduml
 ```
 
