@@ -176,4 +176,4 @@ Rel(webUI, email, "Загрузка доклада", "HTTPS")
 <!-- Записи о ключевых принятых архитектурных решениях (ADR) для реализации архитектурно-значимых требований.
 Подробнее: https://confluence.mts.ru/pages/viewpage.action?pageId=421162308
 -->
-- [ADR.NNN Суть решения](adr/adr-template.md)
+- [ADR.001 Определится с категорией системы (ACID|BASE|CAP|PACELC)](adr/adr-1.md)
