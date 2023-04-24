@@ -1,45 +1,42 @@
-```plantuml
+@startuml exzample
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
 
-@startuml
-class Reports {
-id : string
-topic : string
-estimation : int
-dataCreate : datatime
-id: contentManager
+Person(customer0, "Партнер/Слушатель")
+Person(customer1, "Выступающий")
+Person(customer2, "Контент менеджер")
+Person(customer3, "Фасилитатор")
+Person(customer4, "Администратор")
+Person(customer5, "Руководитель проекта")
+
+System_Boundary(alias, "label"){
+    
+
+
+Container(webUI, "Web UI", "React", "Web приложение")
+Container(webOf, "BackOffice", "React", "Web приложение")
+Container(be, "BackEnd", "Java", "BE приложение")
+Container(email, "Email", "Mail server", "Почтовый ящик")
+Container(metr, "Metrics", "Grafana", "Сборщик метрик")
+ContainerDb(db, "DB", "PostgreSQL", "База данных")
+ContainerQueue(Queue, "Queue", "Kafka")
+
+Rel(customer0, webUI, "Вход, регистрация,трансляции", "HTTPS")
+Rel(customer1, webUI, "Загрузка докладов", "HTTPS")
+Rel(webUI, be, "Вход, регистрация, трансляция", "HTTPS")
+Rel(customer2, webOf, "Управление контентом", "HTTPS")
+Rel(customer3, webOf, "Управление расписанием, обратная связь", "HTTPS")
+Rel(customer4, webOf, "Управление трансляцией", "HTTPS")
+Rel(customer5, webOf, "Контроль мероприятия", "HTTPS")
+Rel(webOf, be, "Доклады, логи, трансляции, ретинги, расписание", "HTTPS")
+Rel(email, be, "Загрузка докладов", "HTTPS")
+Rel(webOf, Queue, "Работа с докладами", "HTTPS")
+Rel(Queue, be, "Работа с докладами", "HTTPS")
+Rel(be, db, "Загрузка докладов", "HTTPS")
+Rel(metr, db, "Сбор метрик на основе логов", "HTTPS")
+Rel(webOf, metr, "Сбор метрик на основе логов", "HTTPS")
+Rel(webUI, email, "Загрузка доклада", "HTTPS")
+
 }
-
-class Speakers {
-id : string
-FIO : string
-topic : string
-dataCreate : datatime
-id:Reports
-id:contentManager
-}
-
-Speakers "1" *-- "many" Reports
-
-class contentManager {
-id : string
-FIO : string
-}
-
-contentManager "1" *-- "many" Reports
-contentManager "1" *-- "many" Speakers
-
-class schedule {
-id : string
-dateOfPerformance : datatime
-id:Speakers
-id:Reports
-}
-
-schedule "1" *-- "1" Speakers
-schedule "1" *-- "1" Reports
-
 
 @enduml
-
-```

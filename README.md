@@ -177,3 +177,4 @@ Rel(webUI, email, "Загрузка доклада", "HTTPS")
 Подробнее: https://confluence.mts.ru/pages/viewpage.action?pageId=421162308
 -->
 - [ADR.001 Определится с категорией системы (ACID|BASE|CAP|PACELC)](adr/adr-1.md)
+- [ADR.002 Выбрать шаблон интеграции(метод, структура, взаимодействие)](adr/adr-2.md)
