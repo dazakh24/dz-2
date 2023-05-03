@@ -7,40 +7,32 @@
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
 
-Person(customer0, "Партнер/Слушатель")
-Person(customer1, "Выступающий")
-Person(customer2, "Контент менеджер")
-Person(customer3, "Фасилитатор")
+
 Person(customer4, "Администратор")
-Person(customer5, "Руководитель проекта")
+
 
 System_Boundary(alias, "label"){
     
 
 
-Container(webUI, "Web UI", "Web приложение, которое отвечает за конференцию")
+
 Container(webOf, "BackOffice", "Web приложение, которое отвечает за администрирование")
 Container(be, "BackEnd", "Приложение, которое отвечает за контент, управление расписанием, администрирование")
-Container(email, "Email", "Приложение, которое отвечает за управление контентом")
+
 Container(metr, "Metrics", "Приложение, которое отвечает за  администрирование")
 ContainerDb(db, "DB", "Приложение, которое отвечает за контент, управление расписанием, администрирование")
-ContainerQueue(Queue, "Queue", "Приложение, которое отвечает за управление контентом")
 
-Rel(customer0, webUI, "Вход, регистрация,трансляции")
-Rel(customer1, webUI, "Загрузка докладов")
-Rel(webUI, be, "Вход, регистрация, трансляция")
-Rel(customer2, webOf, "Управление контентом")
-Rel(customer3, webOf, "Управление расписанием, обратная связь")
+
+
 Rel(customer4, webOf, "Управление трансляцией")
-Rel(customer5, webOf, "Контроль мероприятия")
+
 Rel(webOf, be, "Доклады, логи, трансляции, ретинги, расписание")
-Rel(email, be, "Загрузка докладов")
-Rel(webOf, Queue, "Работа с докладами")
-Rel(Queue, be, "Работа с докладами")
+
+
 Rel(be, db, "Загрузка докладов")
 Rel(metr, db, "Сбор метрик на основе логов")
 Rel(webOf, metr, "Сбор метрик на основе логов")
-Rel(webUI, email, "Загрузка доклада")
+
 
 }
 
