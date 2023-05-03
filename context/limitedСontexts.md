@@ -3,7 +3,7 @@
 Подробнее: https://confluence.mts.ru/pages/viewpage.action?pageId=375783261
 -->
 
-[Конференция](context/contextConference.md)
-[Управление расписанием](contextScheduleManagement.md)
-[Администрирование](contextAdministration.md)
-[Управление контентом](context/contextContent.md)
+- [Конференция](context/contextConference.md)
+- [Управление расписанием](contextScheduleManagement.md)
+- [Администрирование](contextAdministration.md)
+- [Управление контентом](context/contextContent.md)
